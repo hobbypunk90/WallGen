@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 from pydbus import SessionBus
 
 import argparse
@@ -30,10 +32,11 @@ def main(args):
                         run(loop)
             elif args.quit:
                 wg.Close()
-        if not args.monitor:
-            new_wallpaper()
-        elif type(wg) == WallGenDBUSService:
+        elif type(wg) == WallGenDBUSService and args.monitor:
             raise Exception("Monitoring is not possible without DBus service!")
+        if not args.monitor and not args.quit:
+            new_wallpaper()
+        
     
 def run(loop):
     try:
@@ -64,8 +67,9 @@ def parse_arguments():
     parser.add_argument('-g', '--generate-only', action='store_true', default=False,
                         help='Only generates the image, don\'t set it via gsettings')
 
-    return parser.parse_args(["--generate-only"])
+    return parser.parse_args()
 
 
 if __name__ == "__main__":
     main(parse_arguments())
+    
