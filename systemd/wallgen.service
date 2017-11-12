@@ -1,0 +1,6 @@
+[Unit]
+Description=Service for a new wallpaper
+
+[Service]
+Restart=on-failure
+ExecStart=/opt/WallGen/bin/wallgen

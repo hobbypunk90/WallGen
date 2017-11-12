@@ -1,0 +1,3 @@
+#!/bin/sh
+
+python /opt/WallGen/python/wallgen.py $@

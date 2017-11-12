@@ -1,0 +1,10 @@
+= {project-name} Changelog
+:project-name: WallGen
+:uri-repo: https://github.com/hobbypunk90/{project-name}
+
+This document provides a high-level view of the changes to the {project-name} by release.
+For a detailed view of what has changed, refer to the {uri-repo}/commits/master[commit history] on GitHub.
+
+== 0.1 (2017-11-12)
+
+* Initial release

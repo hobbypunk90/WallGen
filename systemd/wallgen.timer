@@ -1,0 +1,10 @@
+[Unit]
+Description=Service for hourly new wallpaper
+After=wallgen-dbus.service
+
+[Timer]
+OnCalendar=hourly
+#OnCalendar=*-*-* *:*:00
+
+[Install]
+WantedBy=default.target

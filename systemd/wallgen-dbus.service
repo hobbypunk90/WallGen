@@ -1,0 +1,7 @@
+[Unit]
+Description=Service for a new wallpaper on display changes
+
+[Service]
+Restart=on-failure
+ExecStart=/opt/WallGen/bin/wallgen --dbus
+ExecStop=/opt/WallGen/bin/wallgen --quit
