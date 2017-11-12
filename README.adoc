@@ -2,7 +2,7 @@
 
 == Summary
 
-WallGen is a tool to generate wallpaper matching for your display configuration.
+WallGen is a tool to generate wallpapers matching to your display configuration.
 
 == Restrictions
 
