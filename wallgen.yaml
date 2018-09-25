@@ -1,0 +1,17 @@
+#types: reddit, local
+type: local
+
+# for type reddit
+#subreddit: earthporn
+
+# for type local
+#directory: ~/Pictures/Wallpapers
+
+# output path for generated wallpaper(s)
+#output: ~/Pictures
+
+# only generate the wallpaper don't set it
+generate_only: false
+
+disable_background: false
+disable_lockscreen: false

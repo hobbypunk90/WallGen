@@ -1,6 +1,10 @@
 [Unit]
 Description=Service for a new wallpaper
+After=wallgen-dbus.service
 
 [Service]
 Restart=on-failure
 ExecStart=/opt/WallGen/bin/wallgen
+
+[Install]
+WantedBy=default.target
