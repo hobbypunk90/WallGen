@@ -7,4 +7,4 @@ OnCalendar=hourly
 #OnCalendar=*-*-* *:*:00
 
 [Install]
-WantedBy=default.target
+WantedBy=graphical-session.target

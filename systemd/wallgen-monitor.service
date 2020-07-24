@@ -7,4 +7,4 @@ Restart=on-failure
 ExecStart=/opt/WallGen/bin/wallgen --monitor
 
 [Install]
-WantedBy=default.target
+WantedBy=graphical-session.target
