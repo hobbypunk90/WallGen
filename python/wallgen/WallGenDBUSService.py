@@ -78,9 +78,11 @@ class GnomeWallpaperBuilder:
             file = "file://{}".format(output)
             if (not config.disable_background) and settings_background.get_string("picture-uri") != file:
                 print("set!")
+                settings_background.set_string("picture-options", "wallpaper")
                 settings_background.set_string("picture-uri", file)
             if (not config.disable_lockscreen) and settings_screensaver.get_string("picture-uri") != file:
                 print("set!")
+                settings_screensaver.set_string("picture-options", "wallpaper")
                 settings_screensaver.set_string("picture-uri", file)
 
 

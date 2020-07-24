@@ -37,10 +37,10 @@ class Config(object):
         self.desktop = os.environ['XDG_SESSION_DESKTOP'].lower()
 
     def is_supported_desktop(self):
-        return self.desktop in ['gnome', 'kde']
+        return self.desktop in ['gnome', 'gnome-xorg', 'kde']
 
     def is_gnome(self):
-        return self.desktop == 'gnome'
+        return self.desktop in ['gnome','gnome-xorg'] 
 
     def is_kde(self):
         return self.desktop == 'kde'
