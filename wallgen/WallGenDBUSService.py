@@ -65,8 +65,8 @@ class GnomeWallpaperBuilder:
             for monitor in active_monitors:
                 image = generator.get_image(width=monitor[4], height=monitor[5])
                 wallpaper.composite(image, left=monitor[2], top=monitor[3])
-                with wallpaper.convert('png') as converted:
-                    self._save(converted, self.config)
+            with wallpaper.convert('png') as converted:
+                self._save(converted, self.config)
 
     def _save(self, image, config):
         output = '{}/Wallpaper.png'.format(config.output)

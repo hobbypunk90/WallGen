@@ -1,6 +1,6 @@
 import os
 
-from yaml import load
+from yaml import load, dump
 try:
     from yaml import CLoader as Loader
 except ImportError:
@@ -19,13 +19,14 @@ class Config(object):
                   'disable_background': False,
                   'disable_lockscreen': False
                 }
+        p = os.path.expanduser('~/.config/wallgen.yaml')
         try:
-            p = os.path.expanduser('~/.config/wallgen.yaml')
             with open(p) as stream:
                 yaml = load(stream, Loader=Loader)
                 params = {**params, **yaml}
         except Exception:
-            pass
+            with open(p, "w") as stream:
+                dump(params, stream)
         self.type = params['type']
         self.subreddit = params['subreddit']
         self.directory = params['directory']
