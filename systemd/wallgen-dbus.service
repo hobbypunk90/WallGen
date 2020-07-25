@@ -6,8 +6,8 @@ Type=dbus
 BusName=de.thm.mni.mhpp11.WallGen
 
 Restart=on-failure
-ExecStart=/opt/WallGen/bin/wallgen --dbus
-ExecStop=/opt/WallGen/bin/wallgen --quit
+ExecStart=python -m wallgen --dbus
+ExecStop=python -m wallgen --quit
 
 [Install]
 WantedBy=graphical-session.target
