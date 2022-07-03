@@ -2,7 +2,7 @@
 
 pkgname=python-wallgen
 pkgbase=${pkgname}
-pkgver=0.2.1
+pkgver=0.2.2
 pkgrel=1
 _tag=${pkgver}
 _name=${pkgname#python-}
@@ -22,7 +22,7 @@ build() {
 package() {
   cd "$srcdir/WallGen"
   python -m installer --destdir="$pkgdir" dist/*.whl
-  DESTSYSTEMD="$pkgdir/etc/systemd/user"
+  DESTSYSTEMD="$pkgdir/usr/lib/systemd/user"
   install -Dm644 "systemd/wallgen.service" "$DESTSYSTEMD/wallgen.service"
   install -Dm644 "systemd/wallgen.timer" "$DESTSYSTEMD/wallgen.timer"
   install -Dm644 "systemd/wallgen-dbus.service" "$DESTSYSTEMD/wallgen-dbus.service"
