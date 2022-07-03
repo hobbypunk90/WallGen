@@ -101,3 +101,8 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+pkg/
+src/
+*.tar.zst
+WallGen/
