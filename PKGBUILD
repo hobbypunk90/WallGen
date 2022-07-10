@@ -2,7 +2,7 @@
 
 pkgname=python-wallgen
 pkgbase=${pkgname}
-pkgver=0.2.2
+pkgver=$(grep -Po "(?<=version=')([0-9\.]+)(?=')" setup.py)
 pkgrel=1
 _tag=${pkgver}
 _name=${pkgname#python-}

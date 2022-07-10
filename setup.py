@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
      name='wallgen',  
-     version='0.2.2',
+     version='0.2.3',
      scripts=['bin/wallgen'] ,
      author="Marcel Hoppe",
      author_email="hoppe.marcel@gmail.com",

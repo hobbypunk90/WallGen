@@ -3,6 +3,7 @@ Description=Service for a new wallpaper on display changes
 
 [Service]
 Type=dbus
+RestartSec=1s
 BusName=de.thm.mni.mhpp11.WallGen
 
 Restart=on-failure
