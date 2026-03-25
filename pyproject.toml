@@ -8,7 +8,7 @@ version = "26.3.1"
 description="A wallpaper generator for gnome (and kde)"
 readme = "README.md"
 requires-python = ">=3.6"
-license = {file = "LICENSE"}
+license = "GPL-3.0-or-later"
 authors = [
     {name = "Marcel Hoppe"}
 ]
@@ -19,6 +19,8 @@ dependencies = [
     "PyYAML"
 ]
 
+[project.scripts]
+wallgen = "wallgen.__main__:start"
+
 [tool.setuptools]
 packages = ["wallgen"]
-script-files = ["bin/wallgen"]
