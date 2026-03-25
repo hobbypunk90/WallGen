@@ -1,0 +1,5 @@
+[settings]
+disable_tools = ["python"]
+
+[env]
+_.python.venv = { path = ".venv", create = true }

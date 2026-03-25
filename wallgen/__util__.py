@@ -34,7 +34,14 @@ def save(image, output):
         tmpfile = "/tmp/wallgen"
         converted.save(filename=tmpfile)
         shutil.move(tmpfile, output)
-        
+
+def is_dark_image(path, threshold=0.4) -> bool:
+    with Image(filename=path) as image:
+        image.resize(1, 1)
+        pixel = image[0, 0]
+        brightness = (0.299 * pixel.red + 0.587 * pixel.green + 0.114 * pixel.blue)
+
+        return brightness < threshold
 
 
 def add_default_arguments(parser, output_suffix):

@@ -1,4 +1,0 @@
-pydbus
-PyGObject
-pyyaml
-wand

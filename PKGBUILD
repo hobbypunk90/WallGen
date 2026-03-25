@@ -1,27 +1,33 @@
 # Maintainer: Marcel Hoppe <hoppe.marcel@gmail.com>
 
-pkgname=python-wallgen
-pkgbase=${pkgname}
-pkgver=$(grep -Po "(?<=version=')([0-9\.]+)(?=')" setup.py)
+pkgname=wallgen-git
+pkgver=26.3.1
 pkgrel=1
-_tag=${pkgver}
-_name=${pkgname#python-}
 pkgdesc='WallGen is a tool to generate wallpapers matching for your display configuration.'
 arch=('any')
-source=("git+https://github.com/hobbypunk90/WallGen.git#tag=${_tag}")
+source=("git+https://github.com/hobbypunk90/WallGen.git")
 sha256sums=(SKIP)
 license=('GPL')
-depends=('python>=3.10' 'python-yaml' 'python-pydbus' 'python-gobject' 'imagemagick' 'python-wand')
-makedepends=('python-build' 'python-installer' 'python-wheel')
+depends=('python' 'python-wand' 'python-pydbus' 'python-gobject' 'python-yaml' 'imagemagick')
+makedepends=('git' 'python-build' 'python-installer' 'python-wheel')
+provides=('wallgen')
+conflicts=('wallgen')
+
+pkgver() {
+  cd "WallGen"
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
 
 build() {
-  cd "$srcdir/WallGen"
+  cd "WallGen"
+  # Baut das moderne Python-Wheel aus deiner pyproject.toml
   python -m build --wheel --no-isolation
 }
 
 package() {
-  cd "$srcdir/WallGen"
+  cd "WallGen"
   python -m installer --destdir="$pkgdir" dist/*.whl
+
   DESTSYSTEMD="$pkgdir/usr/lib/systemd/user"
   install -Dm644 "systemd/wallgen.service" "$DESTSYSTEMD/wallgen.service"
   install -Dm644 "systemd/wallgen.timer" "$DESTSYSTEMD/wallgen.timer"

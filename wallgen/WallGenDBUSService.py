@@ -57,32 +57,36 @@ class GnomeWallpaperBuilder:
 
     def build(self, generator):
         active_monitors = []
+        generator.reset()
         for monitor in self.dc.GetResources()[1]:
             if monitor[6] > -1:
                 active_monitors.append(monitor)
         (max_width, max_height) = self._get_maximum_resolution(active_monitors)
         with Image(width=max_width, height=max_height) as wallpaper:
             for monitor in active_monitors:
-                image = generator.get_image(width=monitor[4], height=monitor[5])
+                image = generator.get_image(width=monitor[4], height=monitor[5], dark_mode=self._is_dark_mode())
                 wallpaper.composite(image, left=monitor[2], top=monitor[3])
             with wallpaper.convert('png') as converted:
                 self._save(converted, self.config)
 
     def _save(self, image, config):
-        output = '{}/Wallpaper.png'.format(config.output)
+        if self._is_dark_mode():
+            output = '{}/Wallpaper_Dark.png'.format(config.output)
+        else:
+            output = '{}/Wallpaper.png'.format(config.output)
+        
         __util__.save(image, output)
         if not config.generate_only:
             from gi.repository import Gio
             settings_background = Gio.Settings("org.gnome.desktop.background")
             settings_screensaver = Gio.Settings("org.gnome.desktop.screensaver")
             file = "file://{}".format(output)
-            if (not config.disable_background) and settings_background.get_string("picture-uri") != file:
-                print("set!")
-                settings_background.set_string("picture-options", "wallpaper")
-                settings_background.set_string("picture-uri", file)
+            if (not config.disable_background) and settings_background.get_string("picture-uri-dark" if self._is_dark_mode() else "picture-uri") != file:
+                settings_background.set_string("picture-options", "spanned")
+                
+                settings_background.set_string("picture-uri-dark" if self._is_dark_mode() else "picture-uri", file)
             if (not config.disable_lockscreen) and settings_screensaver.get_string("picture-uri") != file:
-                print("set!")
-                settings_screensaver.set_string("picture-options", "wallpaper")
+                settings_screensaver.set_string("picture-options", "spanned")
                 settings_screensaver.set_string("picture-uri", file)
 
 
@@ -100,6 +104,11 @@ class GnomeWallpaperBuilder:
                 if height >= max_resolution[1]:
                     max_resolution = (max_resolution[0], height)
         return max_resolution
+
+    def _is_dark_mode(self) -> bool:
+        from gi.repository import Gio
+        color_scheme = Gio.Settings.new('org.gnome.desktop.interface').get_string('color-scheme')
+        return color_scheme == 'prefer-dark'
 
 
 class KDEWallpaperBuilder:

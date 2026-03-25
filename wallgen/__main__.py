@@ -40,11 +40,11 @@ def start():
     loop = GLib.MainLoop()
 
     if args.dbus:
-        bus.publish('de.thm.mni.mhpp11.WallGen', WallGenDBUSService(loop))
+        bus.publish('eu.hobbypunk90.WallGen', WallGenDBUSService(loop))
         run(loop)
     else:
         try:
-            wg = bus.get('de.thm.mni.mhpp11.WallGen')
+            wg = bus.get('eu.hobbypunk90.WallGen')
         except GLib.Error:
             wg = WallGenDBUSService(None)
         if type(wg) != WallGenDBUSService:
