@@ -1,7 +1,7 @@
 # Maintainer: Marcel Hoppe <hoppe.marcel@gmail.com>
 
 pkgname=wallgen-git
-pkgver=26.3.1
+pkgver=r16.eb70f16
 pkgrel=1
 pkgdesc='WallGen is a tool to generate wallpapers matching for your display configuration.'
 arch=('any')
@@ -20,13 +20,12 @@ pkgver() {
 
 build() {
   cd "WallGen"
-  # Baut das moderne Python-Wheel aus deiner pyproject.toml
-  python -m build --wheel --no-isolation
+  /usr/bin/python -m build --wheel --no-isolation
 }
 
 package() {
   cd "WallGen"
-  python -m installer --destdir="$pkgdir" dist/*.whl
+  /usr/bin/python -m installer --destdir="$pkgdir" dist/*.whl
 
   DESTSYSTEMD="$pkgdir/usr/lib/systemd/user"
   install -Dm644 "systemd/wallgen.service" "$DESTSYSTEMD/wallgen.service"
