@@ -1,7 +1,7 @@
 # Maintainer: Marcel Hoppe <hoppe.marcel@gmail.com>
 
 pkgname=wallgen-git
-pkgver=r17.9c517b2
+pkgver=r18.c5f7037
 pkgrel=1
 pkgdesc='WallGen is a tool to generate wallpapers matching for your display configuration.'
 arch=('any')

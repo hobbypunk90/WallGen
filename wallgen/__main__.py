@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 import os
 import argparse
 
@@ -52,11 +51,16 @@ def start():
 
                 dc = None
                 if config.is_gnome():
+                    from gi.repository import Gio
+
                     dc = bus.get('org.gnome.Mutter.DisplayConfig')
+                    settings = Gio.Settings.new('org.gnome.desktop.interface')
                 elif config.is_kde():
                     dc = bus.get('org.kde.KScreen', object_path='/backend')
+                    
                 with wg.Closed.connect(loop.quit):
                     if config.is_gnome():
+                        settings.connect('changed::color-scheme', lambda s, k: wg.NewWallpaper())
                         with dc.MonitorsChanged.connect(wg.NewWallpaper):
                             run(loop)
                     elif config.is_kde():
