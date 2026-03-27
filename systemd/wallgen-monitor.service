@@ -4,8 +4,8 @@ After=wallgen-dbus.service
 
 [Service]
 Restart=on-failure
-RestartSec=1s
-ExecStart=python -m wallgen --monitor
+RestartSec=5s
+ExecStart=/usr/bin/wallgen --monitor
 
 [Install]
 WantedBy=graphical-session.target
